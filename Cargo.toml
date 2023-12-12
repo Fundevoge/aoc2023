@@ -8,7 +8,13 @@ edition = "2021"
 [dependencies]
 bacon-sci = "0.14.0"
 itertools = "0.12.0"
+lazy_static = "1.4.0"
 nom = "7.1.3"
 num = "0.4.1"
+once_cell = "1.19.0"
 proc-macro2 = "1.0.70"
+rayon = "1.8.0"
 syn = "2.0.39"
+
+[target.release]
+lto = "true"
