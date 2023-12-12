@@ -92,6 +92,24 @@ fn parse_specs(specs: &str) -> SpecificationList {
     }
 }
 
+pub fn choices<T: Copy>(glyphs: &[T], n_elements: usize) -> Vec<Vec<T>> {
+    if n_elements == glyphs.len() {
+        vec![glyphs.into()]
+    } else if n_elements == 0 {
+        vec![vec![]]
+    } else {
+        let g = glyphs[0];
+        let mut new_choices_with = choices(&glyphs[1..], n_elements - 1);
+        for choice in new_choices_with.iter_mut() {
+            choice.push(g);
+        }
+        let new_choices_without = choices(&glyphs[1..], n_elements);
+
+        new_choices_with.extend(new_choices_without);
+        new_choices_with
+    }
+}
+
 #[cfg(test)]
 mod test {
     use super::*;
